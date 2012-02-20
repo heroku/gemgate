@@ -18,7 +18,7 @@ module Gemgate
 
     helpers do
       def repository
-        @repository ||= self.class.repository || Repository.default
+        @repository ||= self.class.repository || Repository.new
       end
     end
   end

@@ -1,9 +1,5 @@
 module Gemgate
   class Repository
-    def self.default
-      new
-    end
-
     attr_writer :realizer, :gem_files, :index
 
     def add_gem(path)

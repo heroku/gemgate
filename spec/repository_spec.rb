@@ -1,10 +1,6 @@
 require "spec_helper"
 
 describe Gemgate::Repository do
-  describe ".default" do
-    it "returns the default repository"
-  end
-
   it "uses the gem realizer to realize a gem binary blob" do
     realizer = mock("realizer")
     realizer.should_receive(:call).with("hi")
