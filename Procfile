@@ -1,0 +1,1 @@
+web: bundle exec ruby -I lib bin/web

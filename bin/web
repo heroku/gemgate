@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "gemgate/web"
+
+port = ENV["PORT"] || 5000
+
+Gemgate::Web.run!(:port => port)
