@@ -5,6 +5,12 @@ module Gemgate
         @options = options
       end
 
+      def get(path)
+        if file = remote_directory.files.get(path)
+          file.body
+        end
+      end
+
       def create(path, body)
         remote_directory.files.create(:key => path, :body => body, :acl => "public-read")
       end

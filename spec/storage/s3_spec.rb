@@ -34,6 +34,16 @@ describe Gemgate::Storage::S3 do
     remote_file.public_url.should_not be_nil
   end
 
+  it "gets an existing file's data" do
+    remote_directory.files.create(:key => "foobar", :body => "hello")
+
+    subject.get("foobar").should == "hello"
+  end
+
+  it "returns nil when getting a file that doesn't exist" do
+    subject.get("foobar").should be_nil
+  end
+
   def remote_directory
     fog.directories.get("gemgate-test")
   end
