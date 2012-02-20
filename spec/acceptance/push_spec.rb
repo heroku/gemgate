@@ -6,13 +6,16 @@ describe "acceptance: push" do
 
     last_response.status.should == 200
 
-    [
-      "gems/foobar-0.0.1.gem"
-    ].each do |filename|
-      file = directory.files.get(filename)
-      file.should_not be_nil, "#{filename} should exist"
+    file = directory.files.get("gems/foobar-0.0.1.gem")
+    file.should_not be_nil, "gems/foobar-0.0.1.gem should exist"
+    file.public_url.should_not be_nil, "gems/foobar-0.0.1.gem should be public"
+    file.body.tap {|b| b.force_encoding("binary") }.should == fixture_read("foobar-0.0.1.gem")
 
-      file.public_url.should_not be_nil, "#{filename} should be public"
-    end
+    file = directory.files.get("latest_specs.4.8.gz")
+    file.should_not be_nil, "latest_specs.4.8.gz should exist"
+    file.public_url.should_not be_nil, "latest_specs.4.8.gz should be public"
+
+    latest_specs = Marshal.load(Gem.gunzip(file.body))
+    latest_specs.should == [["foobar", Gem::Version.new("0.0.1"), "ruby"]]
   end
 end

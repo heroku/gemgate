@@ -2,7 +2,7 @@ ENV["AWS_ACCESS_KEY_ID"] = "foobar"
 ENV["AWS_SECRET_ACCESS_KEY"] = "foobar"
 ENV["S3_BUCKET"] = "gemgate-test"
 
-require "gemgate/web"
+require "gemgate"
 
 require "rack/test"
 
@@ -13,6 +13,8 @@ RSpec.configure do |c|
     Fog.mock!
     Fog::Mock.reset
 
+    Gemgate::Web.repository = nil
+
     directory.save
   end
 
@@ -22,6 +24,10 @@ RSpec.configure do |c|
 
   def fixture(name)
     File.join(File.expand_path("../fixtures", __FILE__), name)
+  end
+
+  def fixture_read(name)
+    File.read(fixture(name), encoding: "binary")
   end
 
   def directory
