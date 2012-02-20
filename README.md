@@ -6,8 +6,8 @@ Example use:
 
 ```bash
 $ gem build foobar.gemspec #=> produces foobar-0.0.1.gem
-$ curl --data-binary @foobar-0.0.1.gem https://gemgate.herokuapp.com/
-$ gem sources -a https://gemgate.s3.amazonaws.com/deadbeef/
+$ curl -F file=@foobar-0.0.1.gem https://gemgate.herokuapp.com/
+$ gem sources -a https://gemgate.s3.amazonaws.com/
 $ gem install foobar -v 0.0.1
 ```
 
@@ -17,8 +17,8 @@ $ gem install foobar -v 0.0.1
 $ cp .env.sample .env
 # edit .env
 $ foreman start
-$ curl --data-binary @foobar-0.0.1.gem http://localhost:3000/
-$ gem sources -a https://gemgate-development.s3.amazonaws.com/deadbeef/
+$ curl -F file=@foobar-0.0.1.gem http://localhost:3000/
+$ gem sources -a https://gemgate-development.s3.amazonaws.com/
 $ gem install foobar -v 0.0.1
 ```
 
