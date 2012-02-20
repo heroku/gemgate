@@ -1,16 +1,30 @@
 require "spec_helper"
 
 describe Gemgate::Index do
-  it "adds a specification using storage" do
-    storage = mock("storage")
-    storage.should_receive(:update).with("latest_specs.4.8.gz", Gem.gzip(Marshal.dump([["foobar", "0.0.1", "ruby"]])))
+  it "adds a gem to latest specs" do
+    gem = stub("gem")
 
-    gem = mock("gem")
-    gem.should_receive(:name) { "foobar" }
-    gem.should_receive(:version) { "0.0.1" }
-    gem.should_receive(:platform) { "ruby" }
+    latest_specs = mock("latest specs")
+    latest_specs.should_receive(:add).with(gem)
 
-    subject.storage = storage
+    quick_marshal_specs = stub("quick marshal specs").as_null_object
+
+    subject.latest_specs = latest_specs
+    subject.quick_marshal_specs = quick_marshal_specs
+
+    subject.add(gem)
+  end
+
+  it "adds a gem to the quick marshal specs" do
+    gem = stub("gem")
+
+    latest_specs = stub("latest specs").as_null_object
+
+    quick_marshal_specs = mock("quick marshal specs")
+    quick_marshal_specs.should_receive(:add).with(gem)
+
+    subject.latest_specs = latest_specs
+    subject.quick_marshal_specs = quick_marshal_specs
 
     subject.add(gem)
   end

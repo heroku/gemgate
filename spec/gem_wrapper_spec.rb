@@ -25,6 +25,10 @@ describe Gemgate::GemWrapper do
     subject.filename.should == "foobar-0.0.1.gem"
   end
 
+  it "returns its spec filename" do
+    subject.spec_filename.should == "foobar-0.0.1.gemspec"
+  end
+
   it "returns an io with its data" do
     subject.data.should be_a(IO)
   end

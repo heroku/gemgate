@@ -15,6 +15,10 @@ module Gemgate
       spec.file_name
     end
 
+    def spec_filename
+      spec.spec_name
+    end
+
     def name
       spec.name
     end

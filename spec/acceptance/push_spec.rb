@@ -17,5 +17,12 @@ describe "acceptance: push" do
 
     latest_specs = Marshal.load(Gem.gunzip(file.body))
     latest_specs.should == [["foobar", Gem::Version.new("0.0.1"), "ruby"]]
+
+    file = directory.files.get("quick/Marshal.4.8/foobar-0.0.1.gemspec.rz")
+    file.should_not be_nil, "quick spec should exist"
+    file.public_url.should_not be_nil, "quick spec should be public"
+
+    quick_spec = Marshal.load(Gem.inflate(file.body))
+    quick_spec.should == Gemgate::GemWrapper.from_path(fixture("foobar-0.0.1.gem")).spec
   end
 end
