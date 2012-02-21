@@ -26,7 +26,7 @@ $ gem install foobar -v 0.0.1
 
 ```bash
 $ heroku create gemgate-production -s cedar
-$ heroku config:add -a gemgate \
+$ heroku config:add -a gemgate-production \
   AWS_ACCESS_KEY_ID=... \
   AWS_SECRET_ACCESS_KEY=... \
   S3_BUCKET=...
