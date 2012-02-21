@@ -17,7 +17,7 @@ $ gem install foobar -v 0.0.1
 $ cp .env.sample .env
 # edit .env
 $ foreman start
-$ curl -F file=@foobar-0.0.1.gem http://localhost:3000/
+$ curl -F file=@foobar-0.0.1.gem http://localhost:5000/
 $ gem sources -a https://gemgate-development.s3.amazonaws.com/
 $ gem install foobar -v 0.0.1
 ```
