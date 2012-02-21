@@ -1,5 +1,5 @@
 module Gemgate
-  class LatestSpecs
+  class SpecsIndex
     class Entry
       def initialize(gem)
         @gem = gem
@@ -11,25 +11,41 @@ module Gemgate
     end
 
     attr_accessor :storage
+    attr_reader :conditions
+
+    def initialize(filename)
+      @filename = filename
+      @conditions = []
+    end
 
     def add(gem)
       entry = Entry.new(gem)
 
-      update_with(entry)
+      if conditions.all? {|c| c.call(gem) }
+        update_with(entry)
+      else
+        ensure_exists
+      end
     end
 
     private
 
-    def filename
-      "latest_specs.4.8.gz"
+    def ensure_exists
+      unless existing_file_data
+        storage.update(@filename, to_gzipped_marshal([]))
+      end
     end
 
     def update_with(entry)
-      storage.update(filename, to_gzipped_marshal(existing_data + [entry.for_inclusion]))
+      storage.update(@filename, to_gzipped_marshal(existing_data + [entry.for_inclusion]))
+    end
+
+    def existing_file_data
+      @existing_file_data ||= storage.get(@filename)
     end
 
     def existing_data
-      if existing_file_data = storage.get(filename)
+      if existing_file_data
         from_gzipped_marshal(existing_file_data)
       else
         []

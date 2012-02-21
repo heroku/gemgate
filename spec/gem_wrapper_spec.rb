@@ -29,6 +29,10 @@ describe Gemgate::GemWrapper do
     subject.spec_filename.should == "foobar-0.0.1.gemspec"
   end
 
+  it "returns its prerelease status" do
+    subject.prerelease?.should be_false
+  end
+
   it "returns an io with its data" do
     subject.data.should be_a(IO)
   end

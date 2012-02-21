@@ -27,6 +27,10 @@ module Gemgate
       spec.version
     end
 
+    def prerelease?
+      spec.version.prerelease?
+    end
+
     def platform
       platform = spec.original_platform
       platform = Gem::Platform::RUBY if platform.nil? or platform.empty?

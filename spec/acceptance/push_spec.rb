@@ -18,6 +18,13 @@ describe "acceptance: push" do
     latest_specs = Marshal.load(Gem.gunzip(file.body))
     latest_specs.should == [["foobar", Gem::Version.new("0.0.1"), "ruby"]]
 
+    file = directory.files.get("prerelease_specs.4.8.gz")
+    file.should_not be_nil, "prerelease_specs.4.8.gz should exist"
+    file.public_url.should_not be_nil, "prerelease_specs.4.8.gz should be public"
+
+    prerelease_specs = Marshal.load(Gem.gunzip(file.body))
+    prerelease_specs.should == []
+
     file = directory.files.get("quick/Marshal.4.8/foobar-0.0.1.gemspec.rz")
     file.should_not be_nil, "quick spec should exist"
     file.public_url.should_not be_nil, "quick spec should be public"
