@@ -14,6 +14,7 @@ module Gemgate
     def latest_specs
       @latest_specs ||= SpecsIndex.new("latest_specs.4.8.gz").tap do |s|
         s.storage = storage
+        s.conditions << lambda {|g| !g.prerelease? }
       end
     end
 
