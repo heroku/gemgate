@@ -1,6 +1,9 @@
 module Gemgate
   module Storage
     class S3
+
+      class Error < StandardError; end
+
       def initialize(env = ENV)
         @env = env
       end
@@ -30,7 +33,11 @@ module Gemgate
       end
 
       def remote_directory
-        fog.directories.get(env!("S3_BUCKET"))
+        fog.directories.get(remote_directory_name) or raise Error, "Bucket `#{remote_directory_name}` doesn't exist"
+      end
+
+      def remote_directory_name
+        env!("S3_BUCKET")
       end
 
       def fog

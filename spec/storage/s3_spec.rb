@@ -44,6 +44,12 @@ describe Gemgate::Storage::S3 do
     subject.get("foobar").should be_nil
   end
 
+  it "errors if the bucket doesn't exist" do
+    remote_directory.destroy
+
+    expect { subject.get("foobar") }.to raise_error(described_class::Error, "Bucket `gemgate-test` doesn't exist")
+  end
+
   def remote_directory
     fog.directories.get("gemgate-test")
   end
