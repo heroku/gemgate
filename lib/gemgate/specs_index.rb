@@ -1,15 +1,5 @@
 module Gemgate
   class SpecsIndex
-    class Entry
-      def initialize(gem)
-        @gem = gem
-      end
-
-      def for_inclusion
-        [@gem.name, @gem.version, @gem.platform]
-      end
-    end
-
     attr_accessor :storage
     attr_reader :conditions
 
@@ -19,10 +9,8 @@ module Gemgate
     end
 
     def add(gem)
-      entry = Entry.new(gem)
-
       if conditions.all? {|c| c.call(gem) }
-        update_with(entry)
+        update_with(gem)
       else
         ensure_exists
       end
@@ -32,12 +20,12 @@ module Gemgate
 
     def ensure_exists
       unless existing_file_data
-        storage.update(@filename, to_gzipped_marshal([]))
+        store([])
       end
     end
 
-    def update_with(entry)
-      storage.update(@filename, to_gzipped_marshal(existing_data + [entry.for_inclusion]))
+    def update_with(gem)
+      store(existing_data + [[gem.name, gem.version, gem.platform]])
     end
 
     def existing_file_data
@@ -50,6 +38,10 @@ module Gemgate
       else
         []
       end
+    end
+
+    def store(data)
+      storage.update(@filename, to_gzipped_marshal(data))
     end
 
     def to_gzipped_marshal(data)
