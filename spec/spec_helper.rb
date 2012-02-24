@@ -1,3 +1,4 @@
+ENV["GEMGATE_AUTH"] = "foo:bar"
 ENV["AWS_ACCESS_KEY_ID"] = "foobar"
 ENV["AWS_SECRET_ACCESS_KEY"] = "foobar"
 ENV["S3_BUCKET"] = "gemgate-test"
@@ -16,6 +17,8 @@ RSpec.configure do |c|
     Gemgate::Web.repository = nil
 
     directory.save
+
+    basic_authorize *ENV["GEMGATE_AUTH"].split(":")
   end
 
   def app

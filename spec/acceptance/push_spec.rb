@@ -64,4 +64,26 @@ describe "acceptance: push" do
     quick_spec = Marshal.load(Gem.inflate(file.body))
     quick_spec.should == Gemgate::GemWrapper.from_path(fixture("foobar-0.0.1.pre.gem")).spec
   end
+
+  it "does nothing if no authentication info is provded" do
+    header "Authorization", nil
+
+    post "/", :file => Rack::Test::UploadedFile.new(fixture("foobar-0.0.1.pre.gem"), "application/octet-stream")
+
+    last_response.status.should == 401
+
+    file = directory.files.get("gems/foobar-0.0.1.pre.gem")
+    file.should be_nil, "gems/foobar-0.0.1.pre.gem should not exist"
+  end
+
+  it "does nothing if no authentication info is provded but is incorrect" do
+    basic_authorize "in", "correct"
+
+    post "/", :file => Rack::Test::UploadedFile.new(fixture("foobar-0.0.1.pre.gem"), "application/octet-stream")
+
+    last_response.status.should == 401
+
+    file = directory.files.get("gems/foobar-0.0.1.pre.gem")
+    file.should be_nil, "gems/foobar-0.0.1.pre.gem should not exist"
+  end
 end
