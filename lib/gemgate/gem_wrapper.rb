@@ -1,5 +1,3 @@
-require "stringio"
-
 module Gemgate
   class GemWrapper
     def self.from_path(path)
