@@ -2,6 +2,7 @@ ENV["GEMGATE_AUTH"] = "foo:bar"
 ENV["AWS_ACCESS_KEY_ID"] = "foobar"
 ENV["AWS_SECRET_ACCESS_KEY"] = "foobar"
 ENV["S3_BUCKET"] = "gemgate-test"
+ENV["S3_KEY_PREFIX"] = "deadbeef"
 
 require "gemgate"
 

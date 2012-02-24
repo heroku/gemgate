@@ -20,7 +20,7 @@ module Gemgate
     end
 
     def storage
-      @storage ||= Storage::S3.new(ENV)
+      @storage ||= Storage::S3.new
     end
 
     def index
