@@ -1,1 +1,1 @@
-web: bundle exec ruby -I lib bin/web
+web: bundle exec rackup -I lib -p $PORT
