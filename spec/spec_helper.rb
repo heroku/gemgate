@@ -1,3 +1,5 @@
+ENV["RACK_ENV"] = "test"
+
 ENV["GEMGATE_AUTH"] = "foo:bar"
 ENV["AWS_ACCESS_KEY_ID"] = "foobar"
 ENV["AWS_SECRET_ACCESS_KEY"] = "foobar"

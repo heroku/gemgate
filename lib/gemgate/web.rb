@@ -19,7 +19,10 @@ module Gemgate
       [username, password] == auth
     end
 
-    enable :raise_errors
+    configure :test do
+      enable :raise_errors
+    end
+
     disable :show_exceptions
 
     post "/" do
