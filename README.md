@@ -31,8 +31,7 @@ $ heroku config:add -a gemgate-production \
   AWS_ACCESS_KEY_ID=... \
   AWS_SECRET_ACCESS_KEY=... \
   S3_BUCKET=... \
-  S3_KEY_PREFIX=... \
-  RACK_ENV=production
+  S3_KEY_PREFIX=...
 $ git push heroku master
 ```
 
