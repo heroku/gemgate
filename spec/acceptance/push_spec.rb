@@ -18,6 +18,13 @@ describe "acceptance: push" do
     latest_specs = Marshal.load(Gem.gunzip(file.body))
     latest_specs.should == [["foobar", Gem::Version.new("0.0.1"), "ruby"]]
 
+    file = directory.files.get("deadbeef/specs.4.8.gz")
+    file.should_not be_nil, "specs.4.8.gz should exist"
+    file.public_url.should_not be_nil, "specs.4.8.gz should be public"
+
+    specs = Marshal.load(Gem.gunzip(file.body))
+    specs.should == latest_specs
+
     file = directory.files.get("deadbeef/prerelease_specs.4.8.gz")
     file.should_not be_nil, "prerelease_specs.4.8.gz should exist"
     file.public_url.should_not be_nil, "prerelease_specs.4.8.gz should be public"
