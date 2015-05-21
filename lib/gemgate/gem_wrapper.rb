@@ -1,8 +1,10 @@
 module Gemgate
   class GemWrapper
     def self.from_path(path)
+      require "rubygems/package"
+      
       new.tap do |gem_wrapper|
-        gem_wrapper.spec = Gem::Package.open(File.open(path)) {|p| p.metadata }
+        gem_wrapper.spec = Gem::Package.new(File.open(path)).spec
         gem_wrapper.path = path
       end
     end
