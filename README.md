@@ -1,5 +1,8 @@
 # gemgate
 
+[![Build
+Status](https://travis-ci.org/heroku/gemgate.svg)](https://travis-ci.org/heroku/gemgate)
+
 gemgate receives built gems and makes them available via S3.
 
 Example use:
