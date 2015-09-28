@@ -1,4 +1,4 @@
-require "fog"
+require "fog/aws"
 
 require "gemgate/gem_files"
 require "gemgate/gem_wrapper"

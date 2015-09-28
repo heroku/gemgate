@@ -16,8 +16,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Gemgate::VERSION
 
-  gem.add_dependency "sinatra", "~> 1.3.2"
-  gem.add_dependency "fog", "~> 1.5.0"
+  gem.add_dependency "sinatra", "~> 1.4.6"
+  gem.add_dependency "fog-aws", "~> 0.7.4"
 
   gem.add_development_dependency "rack-test"
   gem.add_development_dependency "rake"
