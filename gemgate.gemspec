@@ -18,8 +18,12 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "sinatra", "~> 1.4.6"
   gem.add_dependency "fog-aws", "~> 0.7.4"
+  gem.add_dependency "mime-types", "~> 3.1"
 
   gem.add_development_dependency "rack-test"
   gem.add_development_dependency "rake"
   gem.add_development_dependency "rspec"
+
+  gem.required_ruby_version = '>= 2.4.4'
+
 end
